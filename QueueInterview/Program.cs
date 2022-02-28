@@ -84,19 +84,23 @@ namespace QueueInterview
 
         public void push(T number)
         {
+            //push new element to q2;
             q2.Enqueue(number);
+            //move all elements to q2 from q1
             while (q1.Count > 0)
             {
                 T x = (T)q1.Peek();
                 q2.Enqueue(x);
                 q1.Dequeue();
             }
+            //change queues
             Queue<T> q = q1;
             q1 = q2;
             q2 = q;
         }
         public T pop()
         {
+            //pop element as it queue is ordered as LIFO
             if (q1.Count < 1) return default(T);
             T x = (T)q1.Peek();
             q1.Dequeue();
