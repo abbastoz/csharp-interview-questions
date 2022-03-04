@@ -7,7 +7,18 @@ namespace QueueInterview
     {
         static void Main(string[] args)
         {
-            QueueClass<string> myQue = new QueueClass<string>();
+            MinStack myMin = new MinStack();
+            myMin.push(1);
+            myMin.push(2);
+            myMin.push(3);
+            myMin.push(4);
+            int x= myMin.getMin();
+            Console.WriteLine(x.ToString());
+            int y = myMin.top();
+            Console.WriteLine(y.ToString());
+
+
+            QueueWithStackClass<string> myQue = new QueueWithStackClass<string>();
             myQue.enqueue("apple");
             myQue.enqueue("banana");
             myQue.enqueue("orange");
@@ -24,7 +35,7 @@ namespace QueueInterview
                 Console.WriteLine(obj);
             }
 
-            StackClass<int> myStck = new StackClass<int>();
+            StackWithQueueClass<int> myStck = new StackWithQueueClass<int>();
             myStck.push(1);
             myStck.push(5);
             myStck.push(10);
@@ -41,8 +52,10 @@ namespace QueueInterview
             }
             Console.ReadKey();
         }
+        
+        
     }
-    public class QueueClass<T>
+    public class QueueWithStackClass<T>
     {
         Stack<T> s1 = new Stack<T>();
         Stack<T> s2 = new Stack<T>();
@@ -77,7 +90,7 @@ namespace QueueInterview
             return s1;
         }
     }
-    public class StackClass<T>
+    public class StackWithQueueClass<T>
     {
         Queue<T> q1 = new Queue<T>();
         Queue<T> q2 = new Queue<T>();
@@ -112,4 +125,48 @@ namespace QueueInterview
             return q1;
         }
     }
+    public class StackWithLinkedList<T>
+    {
+
+    }
+    public class MinStack
+    {
+        int topElement;
+        List<int> myStack;
+        public MinStack()
+        {
+            this.myStack = new List<int>();
+        }
+       public  void push(int x)
+        {
+            myStack.Add(x);
+        }
+       public void pop()
+        {
+            if (myStack.Count > 0)
+                myStack.RemoveAt(myStack.Count - 1);
+        }
+       public int top()
+        {
+            if (myStack.Count > 0)
+                topElement = myStack[myStack.Count - 1];
+            return topElement;
+        }
+       public int getMin()
+        {
+            if (myStack.Count < 1) return 0;
+            int minElement = myStack[0];
+            foreach (var obj in myStack)
+            {
+                if (minElement > obj)
+                    minElement = obj;
+            }
+            return minElement;
+        }
+    }
 }
+
+
+
+    
+
