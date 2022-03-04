@@ -8,16 +8,20 @@ namespace QueueInterview
         static void Main(string[] args)
         {
             MinStack myMin = new MinStack();
+            int y = myMin.top();
+            Console.WriteLine(y.ToString());
+            int x = myMin.getMin();
+            Console.WriteLine(x.ToString());
             myMin.push(1);
             myMin.push(2);
             myMin.push(3);
             myMin.push(4);
-            int x= myMin.getMin();
-            Console.WriteLine(x.ToString());
-            int y = myMin.top();
+            
+            y = myMin.top();
             Console.WriteLine(y.ToString());
-
-
+            myMin.pop();
+            y = myMin.top();
+            Console.WriteLine(y.ToString());
             QueueWithStackClass<string> myQue = new QueueWithStackClass<string>();
             myQue.enqueue("apple");
             myQue.enqueue("banana");
