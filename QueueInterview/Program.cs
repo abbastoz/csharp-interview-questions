@@ -7,6 +7,7 @@ namespace QueueInterview
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Cus_free_hitechtalentsllc_jt541Challenge("abcdeaeiaaioaaaaeiiiiouuuooaauuaeiu"));
             MinStack myMin = new MinStack();
             int y = myMin.top();
             Console.WriteLine(y.ToString());
@@ -16,7 +17,7 @@ namespace QueueInterview
             myMin.push(2);
             myMin.push(3);
             myMin.push(4);
-            
+
             y = myMin.top();
             Console.WriteLine(y.ToString());
             myMin.pop();
@@ -31,7 +32,7 @@ namespace QueueInterview
             {
                 Console.WriteLine(obj);
             }
-            Console.WriteLine("dequee:"+myQue.dequeue());         
+            Console.WriteLine("dequee:" + myQue.dequeue());
             myQue.enqueue("watermelon");
             Console.WriteLine("--Elements after dequeue and enqueue ");
             foreach (var obj in myQue.QueueElements())
@@ -56,9 +57,38 @@ namespace QueueInterview
             }
             Console.ReadKey();
         }
-        
-        
+
+        public static string Cus_free_hitechtalentsllc_jt541Challenge(string str)
+        {
+
+            // code goes here  
+            int count = 0, res = 0;
+            char[] s = str.ToCharArray();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (isVowel(s[i]))
+                {
+                    if (i + 1 == s.Length && s[i - 1] <= s[i]) count++;
+                    else
+                    if (s[i] <= s[i+1]) count++;
+                }
+                else
+                {
+                    res = Math.Max(res, count);
+                    count = 0;
+                }
+            }
+            return Math.Max(res, count).ToString();
+
+        }
+        static bool isVowel(char c)
+        {
+            return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+        }
+
     }
+
+
     public class QueueWithStackClass<T>
     {
         Stack<T> s1 = new Stack<T>();
@@ -86,7 +116,7 @@ namespace QueueInterview
             //check if Queue has elements
             if (s1.Count < 0) return default(T);
             T x = (T)s1.Peek();
-                s1.Pop();
+            s1.Pop();
             return x;
         }
         public Stack<T> QueueElements()
@@ -141,22 +171,22 @@ namespace QueueInterview
         {
             this.myStack = new List<int>();
         }
-       public  void push(int x)
+        public void push(int x)
         {
             myStack.Add(x);
         }
-       public void pop()
+        public void pop()
         {
             if (myStack.Count > 0)
                 myStack.RemoveAt(myStack.Count - 1);
         }
-       public int top()
+        public int top()
         {
             if (myStack.Count > 0)
                 topElement = myStack[myStack.Count - 1];
             return topElement;
         }
-       public int getMin()
+        public int getMin()
         {
             if (myStack.Count < 1) return 0;
             int minElement = myStack[0];
@@ -172,5 +202,5 @@ namespace QueueInterview
 
 
 
-    
+
 
