@@ -7,7 +7,31 @@ namespace QueueInterview
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Cus_free_hitechtalentsllc_jt541Challenge("abcdeaeiaaioaaaaeiiiiouuuooaauuaeiu"));
+            PhotoBook po1 = new PhotoBook();
+            po1.GetNumberPages();
+            PhotoBook po2 = new PhotoBook(24);
+            po2.GetNumberPages();
+            BigPhotoBook bpo1 = new BigPhotoBook();
+            bpo1.GetNumberPages();
+
+            Person p1 = new Person();
+            Console.WriteLine(p1.Greet());
+            Student s1 = new Student();
+            s1.SetAge(21);
+            Console.WriteLine(s1.Greet());
+            Console.WriteLine(s1.ShowAge());
+            Console.WriteLine(s1.Study());
+            Teacher t1 = new Teacher();
+            t1.SetAge(45);
+            Console.WriteLine(t1.Greet());
+            Console.WriteLine(t1.Explain());
+
+            int[] B = new int[] { 25, 2, 3, 57, 38, 41 };
+            int [] aa= solve(B);
+            Console.WriteLine(solution(29).ToString());
+            int[] A = new int[] { 10, -10, -1, -1, 10 };
+            int a = solution(A);
+            Console.WriteLine(LongestBeautifulStringInOrder("abcdeaeiaaioaaaaeiiiiouuuooaauuaeiu"));
             MinStack myMin = new MinStack();
             int y = myMin.top();
             Console.WriteLine(y.ToString());
@@ -57,34 +81,137 @@ namespace QueueInterview
             }
             Console.ReadKey();
         }
-
-        public static string Cus_free_hitechtalentsllc_jt541Challenge(string str)
+        static int solution(int n)
         {
+            if (10 > n || n > 99) return 0;
+            string a = n.ToString();            
+            int result = Convert.ToInt32(a[0]) + Convert.ToInt32(a[1]);
+            return result;
 
-            // code goes here  
-            int count = 0, res = 0;
-            char[] s = str.ToCharArray();
-            for (int i = 0; i < s.Length; i++)
+        }
+
+        static int[] solve(int[] a)
+        {           
+            Dictionary<int, int> keyValuePairs = new Dictionary<int, int>();
+            for (int i=0; i<a.Length; i++)
             {
-                if (isVowel(s[i]))
-                {
-                    if (i + 1 == s.Length && s[i - 1] <= s[i]) count++;
-                    else
-                    if (s[i] <= s[i+1]) count++;
+                if (a[i] < 10 ) {
+                    if (keyValuePairs.TryGetValue(a[i], out _))
+                    {
+                        keyValuePairs[a[i]]++;
+                    }
+                    else keyValuePairs.Add(a[i], 1);
                 }
                 else
                 {
-                    res = Math.Max(res, count);
-                    count = 0;
+                    int m, n;
+                    n = a[i];
+                    while (n > 0)
+                    {
+                        m = n % 10;
+                        if (keyValuePairs.TryGetValue(m, out _))
+                        {
+                            keyValuePairs[m]++;
+                        }
+                        else keyValuePairs.Add(m, 1);
+                        n /= 10;
+                    }
                 }
             }
-            return Math.Max(res, count).ToString();
+            int max =0;
+            foreach(var item in keyValuePairs)
+            {
+                if (item.Value > max) max = item.Value;
+            }
+
+            List<int> result= new List<int>();
+            foreach(var item in keyValuePairs)
+            {
+                if (item.Value == max) result.Add(item.Key);
+            }
+
+            int[] xx = result.ToArray();
+            
+            Array.Sort(xx);
+            return xx;
+        } 
+        public static int solution(int[] A)
+        {
+            // write your code in C# 6.0 with .NET 4.5 (Mono)
+            int result = A[0], count = 0, length = A.Length;
+            for (int i = 0; i < length; i++)
+            {
+                
+                if (i + 1 < length)
+                {
+                    result += A[i + 1];
+                   
+                    if (result < 0 && i > 0)
+                    {
+                        if (A[i - 1] < A[i])
+                        {
+                            List<int> list = new List<int>(A);
+                            int tmp = A[i - 1];
+                            list.RemoveAt(i - 1);
+                            list.Add(tmp);
+                            A = list.ToArray();
+                            count++;
+                            i = -1;
+                        }
+                    }
+                }
+            }
+            return count;
+        }
+
+        public static string LongestBeautifulStringInOrder(string word)
+        {
+
+            // code goes here              
+            List<char> lists = new List<char>();            
+            string s = "aeiou";
+            lists.AddRange(s);
+            
+
+            int index = 0;
+            int len = 0;
+            int max = 0;
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i] == lists[index])
+                    len++;
+                else if ((len > 0) && (index + 1 < lists.Count) && (word[i] == lists[index + 1]))
+                {
+                    index++;
+                    len++;
+                }
+                else
+                {
+                    if (index == 4)
+                    {
+                        if (len > max)
+                            max = len;
+                    }
+
+                    index = 0;
+                    len = 0;
+
+                    if (word[i] == lists[0])
+                        len = 1;
+                }
+            }
+
+            if (index == 4)
+            {
+                if (len > max)
+                    max = len;
+            }
+
+            return max.ToString();
 
         }
-        static bool isVowel(char c)
-        {
-            return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
-        }
+        
 
     }
 
@@ -199,8 +326,3 @@ namespace QueueInterview
         }
     }
 }
-
-
-
-
-
