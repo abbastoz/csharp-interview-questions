@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0DB5CB01-36B9-482E-85E1-CA7A1A622859}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>QueueInterview</RootNamespace>
-    <AssemblyName>QueueInterview</AssemblyName>
+    <RootNamespace>CsharpInterviewQuestion</RootNamespace>
+    <AssemblyName>CsharpInterviewQuestion</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

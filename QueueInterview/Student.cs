@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QueueInterview
+namespace CsharpInterviewQuestion
 {
    public class Student:Person
     {

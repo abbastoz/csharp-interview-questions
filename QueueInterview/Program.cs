@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
-namespace QueueInterview
+namespace CsharpInterviewQuestion
 {
     class Program
     {
